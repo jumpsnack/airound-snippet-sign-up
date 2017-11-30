@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ITlv, TlvType, TlvClass } from 'ber-tlv';
 import { TlvFactory, IParseError } from 'ber-tlv';
 import { AiroundProtocolBuilder } from "../app.module";
+import { Router } from "@angular/router";
 
 
 const SERVER_URL = 'http://127.0.0.1:4300/mock';
@@ -60,7 +61,9 @@ export class SignUpComponent   {
   hide = true;
 
   constructor(@Inject(FormBuilder)private formBuilder: FormBuilder,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private router: Router) {
+    this.router.navigate(['uvc']);
   }
 
   /**
@@ -88,8 +91,10 @@ export class SignUpComponent   {
       console.log(AiroundProtocolBuilder.SGU(user))
       console.dir(JSON.parse(AiroundProtocolBuilder.SGU(user)))
 
+      this.router.navigate(['uvc']);
+
       this.http.post(SERVER_URL, AiroundProtocolBuilder.SGU(user), {
-          headers: headers,
+          // headers: headers,
           responseType: 'text'})
         .subscribe((res) => console.dir(res));
     }
