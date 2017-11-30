@@ -1,0 +1,106 @@
+<!--Birth
+Gender
+id
+password
+first name
+last name
+-->
+<body>
+<form class="sign-up-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+  <table class="full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="First name"  formControlName="firstname">
+          <mat-error *ngIf="formGroup.get('firstname').hasError('required')">
+            Firstname is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="formGroup.get('firstname').hasError('minlength')">
+            At least <strong>2 characters</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Last name"  formControlName="lastname">
+          <mat-error *ngIf="formGroup.get('lastname').hasError('required')">
+            Lastname is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="formGroup.get('lastname').hasError('minlength')">
+            At least <strong>2 characters</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <mat-form-field class="full-width email-form">
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-hint>It will be your id</mat-hint>
+          <mat-error *ngIf="formGroup.get('email').hasError('email') && !formGroup.get('email').hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="formGroup.get('email').hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="formGroup.get('password').hasError('required') && !formGroup.get('password').hasError('pattern')">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="formGroup.get('password').hasError('pattern') ">
+            It must contains at least <strong>8 characters, one letter, one number and one special character</strong>
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Enter your password" formControlName="passwordConfirm" [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="formGroup.get('passwordConfirm').hasError('notEquivalent')">
+            Password is not matched
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="birthdate" placeholder="Birthdate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-icon matSuffix>mode_edit</mat-icon>
+          <mat-error *ngIf="formGroup.get('birthdate').hasError('required') && !formGroup.get('birthdate').hasError('pattern')">
+            Birthdate is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="formGroup.get('birthdate').hasError('pattern')">
+            Incorrect format, MM/DD/YYYY
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-radio-group formControlName="gender" class="full-width">
+          <mat-radio-button value="female">Female</mat-radio-button>
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="other">Other</mat-radio-button>
+        </mat-radio-group>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+
+  <button mat-button type="submit" class="mat-raised-button submit-button"
+  [disabled]="formGroup.status === 'INVALID'">Create account</button>
+
+</form>
+</body>

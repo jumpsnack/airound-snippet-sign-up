@@ -1,0 +1,31 @@
+body {
+  min-width: 200px;
+  max-width: 800px;
+  font-size: 1rem;
+}
+
+.sign-up-form {
+  width:100%;
+}
+
+.full-width {
+  margin-top: 18px;
+  margin-left:10px;
+  width:calc(94% - 10px);
+}
+
+.full-width .email-form {
+  width: calc(94% + 10px);
+}
+
+.submit-button {
+  width: 55%;
+  height: 45px;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  left: calc(50% - (55% / 2));
+}
+
+mat-form-field {
+
+}
